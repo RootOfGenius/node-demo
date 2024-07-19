@@ -40,7 +40,9 @@ jobs:
     - name: Codecov
       env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          HEAD_BRANCH: ${{ github.head_ref }}
+          ACTOR: ${{ github.actor }}
       run: |
        curl -Os https://cli.codecov.io/latest/linux/codecov
        chmod +x codecov
-       ./codecov --verbose --enterprise-url https://athena.sun-asterisk.vn upload-process --fail-on-error --token $CODECOV_TOKEN --branch ${{ env.USERNAME }}:${{ env.BRANCH }} --name 'GithubAction' --flag phpunit --file ./coverage.xml --plugin noop --report-type coverage
+       ./codecov --verbose --enterprise-url https://athena.sun-asterisk.vn upload-process --fail-on-error --token $CODECOV_TOKEN --branch $HEAD_BRANCH --name 'GithubAction' --flag phpunit --file ./coverage.xml --plugin noop --report-type coverage
