@@ -37,12 +37,9 @@ jobs:
     - name: Run tests
       run: npm run test
     
-    - name: Codecov
+    - name: Upload coverage reports to Codecov
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        HEAD_BRANCH: ${{ github.head_ref }}
-        ACTOR: ${{ github.actor }}
-      run: |
-       curl -Os https://cli.codecov.io/latest/linux/codecov
-       chmod +x codecov
-       ./codecov --verbose --enterprise-url https://athena.sun-asterisk.vn upload-process --fail-on-error --token $CODECOV_TOKEN --branch $ACTOR:$HEAD_BRANCH --flag phpunit --file ./coverage.xml --plugin noop --report-type coverage
+      uses: codecov/codecov-action@v4.0.1
+      with:
+        token: $CODECOV_TOKEN
