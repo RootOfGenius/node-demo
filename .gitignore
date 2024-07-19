@@ -41,3 +41,5 @@ public/
 *.njsproj
 *.sln
 *.sw?
+
+coverage/
